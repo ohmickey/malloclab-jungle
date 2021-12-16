@@ -39,7 +39,6 @@ Perf index = 42 (util) + 40 (thru) = 82/100
 #define HDRP(bp) ((char *)(bp) - WSIZE)
 #define FTRP(bp) ((char *)(bp) + GET_SIZE(HDRP(bp)) - DSIZE)
 
-
 #define NEXT_BLKP(bp) ((char *)(bp) + GET_SIZE(((char *)(bp) - WSIZE)))
 #define PREV_BLKP(bp) ((char *)(bp) - GET_SIZE(((char *)(bp) - DSIZE)))
 
@@ -54,34 +53,28 @@ team_t team = {
     /* First member's full name */
     "Humyung Lee",
     /* First member's email address */
-    "paul93lee@gmail.com",
+    "paul93lee@gmail.co",
     /* Second member's full name (leave blank if none) */
     "JongWoo Han",
     /* Second member's email address (leave blank if none) */
-    "JongwooHan@gmail.com"
+    "JongwooHan@gmail.co"
 };
 
-#define ALIGNMENT 8
-
 /* rounds up to the nearest multiple of ALIGNMENT */
+
+#define ALIGNMENT 8
 #define ALIGN(size) (((size) + (ALIGNMENT-1)) & ~0x7)
-
-
 #define SIZE_T_SIZE (ALIGN(sizeof(size_t)))
 
 // 전역변수
+
 static char *heap_listp = NULL; // 편의상 힙 시작점.
 static char *find_ptr = NULL; // root가 가리키는 노드.
 
-// char* a;
-// a = &k;
-// *a === k;
+// 순서대로
 
-// char* find_ptr;
-// find_ptr = 주소;
-// *find_ptr = 값;
 void add_free(char* ptr){
-    char* succ;  // char* succ = *(unsigned int*)(find_ptr); \\         ---------------succ = **find_ptr;
+    char* succ;
     succ = GET(find_ptr);
     if (succ != 0){ // 루트에 연결 되어있는게 있을 때. // 루트가 가리키는 주소가 널이 아닐떄
         PUT(succ, ptr); // 첫 노드의 이전 항목에 지금 갱신되는 것을 넣어주고.
@@ -89,6 +82,7 @@ void add_free(char* ptr){
     PUT(SUCC(ptr), succ); // ptr의 다음 노드를 첫번째 노드로 연결 시켜준다.
     PUT(find_ptr, ptr); // 루트가 가리키는 애를 새로들어온 애로 바꾼다.
 }
+
 void fix_link(char *ptr){ // fix과정은 무조건 연결을 끊어줌
     if(GET(PRED(ptr)) == NULL){ // 첫노드
         if(GET(SUCC(ptr)) != NULL){  // 다음 노드가 연결되어있으면,
@@ -133,7 +127,7 @@ static void *coalesce(void *bp){
         size += GET_SIZE(HDRP(PREV_BLKP(bp))) + GET_SIZE(FTRP(NEXT_BLKP(bp)));
         fix_link(PREV_BLKP(bp));// 전블록
         fix_link(NEXT_BLKP(bp));// 다음블록
-        PUT(HDRP(PREV_BLKP(bp)), PACK(size,0)); ////////////////////./...................
+        PUT(HDRP(PREV_BLKP(bp)), PACK(size,0));
         PUT(FTRP(NEXT_BLKP(bp)), PACK(size,0));
         bp = PREV_BLKP(bp); // block pointer 를 이전 블록으로 이동 시킨다.
     }
@@ -145,24 +139,22 @@ static void *coalesce(void *bp){
     char *bp;
     size_t size;
 
-    size = (words%2) ? (words+1) * DSIZE : words * DSIZE;
+    size = (words%2) ? (words+1) * WSIZE : words * WSIZE;
 
     if ( (long)(bp = mem_sbrk(size)) == -1){ // 올림.
         return NULL;
     }
     PUT(HDRP(bp), PACK(size,0));
     PUT(FTRP(bp), PACK(size,0));
-    PUT(PRED(bp), 0);
+    PUT(PRED(bp), 0); // 힙을 늘려줄때 PRED, SUCC 생성.
     PUT(SUCC(bp), 0);
     PUT(HDRP(NEXT_BLKP(bp)), PACK(0,1));
     return coalesce(bp);
 }
 
 int mm_init(void){
-    if ((heap_listp = mem_sbrk(4*WSIZE)) == (void*) -1){ // 16바이트 만큼 확보한다. (unused + PH + PF + SUC + PRED + EH)
-
+    if ((heap_listp = mem_sbrk(4*WSIZE)) == (void*) -1) // 16바이트 만큼 확보한다. (unused + PH + PF + SUC + PRED + EH)
         return -1;
-    }
     PUT(heap_listp, 0);  // unused word 4 bytes, heap_listp 주소의 key값을 0으로 입력
     PUT(heap_listp + (1*WSIZE), PACK(DSIZE,1)); // prologue header -> (8바이트(헤더푸터), 할당됨.)
     PUT(heap_listp + (2*WSIZE), PACK(DSIZE,1)); // prologue footer생성.
@@ -170,7 +162,6 @@ int mm_init(void){
     PUT(heap_listp + (3*WSIZE), PACK(0,1)); // 에필로그 블록헤더
     find_ptr = heap_listp;  // find_ptr 은 heap_listp의 주소값을 복사한다.
     heap_listp += (2*WSIZE);
-
     if (extend_heap(CHUNKSIZE/WSIZE)==NULL)
         return -1;
     return 0;
@@ -223,13 +214,6 @@ void *mm_malloc(size_t size){
     char *bp;
 
     if (size <= 0) return NULL; // 0 보다 같거나 작으면 할당해 줄 필요 없다.
-
-    // if (size <= DSIZE){
-    //     asize = 2*DSIZE;
-    // }
-    // else {
-    //     asize = DSIZE* ( (size + (DSIZE)+ (DSIZE-1)) / DSIZE ); // Double word allignment
-    // }
      asize = ALIGN(size + SIZE_T_SIZE);
 
     if ((bp = find_fit(asize)) != NULL){ //first fit
