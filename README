@@ -50,3 +50,70 @@ To get a list of the driver flags:
 
 	unix> mdriver -h
 
+
+# 🧩 MOBA Chrome Extension
+
+## 1. 다운로드 방법
+
+1. 크롬 웹스토어 - 아래 링크 클릭!
+    
+    [MOBA Chrome Extension](https://chrome.google.com/webstore/detail/moba-chrome-extension/jichinpkdgcmneigeohpgfbjphfhicck?hl=ko)
+    
+2. “Chrome에 추가” 버튼 클릭
+    
+    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/be47889f-9594-46e2-8be9-6614377fc35b/Untitled.png)
+    
+3. 다운로드 후 MOBA 핀 고정하기
+    - 우측 상단 확장 프로그램 버튼 클릭
+    - 핀 고정하기
+    
+    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/963ca077-f938-40f9-96aa-b68608834c83/Untitled.png)
+    
+4. 회원가입
+    - MOBA extension에서 회원가입 버튼을 눌러 [MOBA 웹페이지](https://moba-shop.net/register)로 이동
+    
+    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c281a4bd-cdac-4439-9991-3147591f6467/Untitled.png)
+    
+    - MOBA 웹페이지로 이동해서 회원가입을 완료
+    
+    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c4ec55ae-8132-4f6d-8433-6b66a4ac4399/Untitled.png)
+    
+
+## 2. Extension 사용방법
+
+1. 위에서 회원가입한 정보로 로그인 하기
+2. 장바구니 담기
+    - 자동 크롤링 서비스 제공 사이트 : 무신사, 우신사, W컨셉
+        - 우측 상단 MOBA icon을 클릭하면 자동으로 현재 상품정보 표시
+            
+            ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/321b0d92-4850-4332-a037-50e1493b7cff/Untitled.png)
+            
+            - 담기 버튼을 누르면 장바구니에 자동으로 저장
+                
+                ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/91509ac1-9267-4c1e-9837-ea9543c98389/Untitled.png)
+                
+        - 다른 이미지로 저장하고 싶을 때
+            - 이미지에 마우스 올리면 아래 빨간 점선과 같은 모양으로 변경
+                
+                ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6ab0425e-c7d1-4dec-af1c-0d54b33a092d/Untitled.png)
+                
+            - 이미지 클릭시 URL 을 직접 넣을 수 있는 창으로 변경
+                
+                ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c7d52a96-af8a-448a-b1df-741277fd5941/Untitled.png)
+                
+            - 저장하고 싶은 이미지 주소 복사후 이미지 url 넣기
+                
+                ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a3ae806f-6574-4b23-8346-3cfae67c3b72/Untitled.png)
+                
+            - 담기 버튼 클릭시 저장 완료!
+                
+                ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5dbea013-d4f3-466b-bf5a-ade1d7efaa4b/Untitled.png)
+                
+    - 자동 크롤링 서비스 미제공 사이트
+        - 상품명, 카테고리, 이미지 주소, 상품 가격, 쇼핑몰 이름을 직접 입력
+            
+            ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3ea22ccf-a421-4a0c-b8ee-40fbe9d16fac/Untitled.png)
+            
+            - 담기 버튼 클릭시 장바구니에 저장완료!
+                
+                ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f3fc3fa9-b15e-41b0-840f-3b20bbe7ddc6/Untitled.png)
